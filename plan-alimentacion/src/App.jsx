@@ -20,6 +20,10 @@ const TABS = [
   { id: "compras", label: "Compras", icon: ShoppingBasket },
 ];
 
+const PERSON_KEYS = ["angel", "gabriela"];
+
+const LOAD_ERROR_MESSAGE = "Hubo un problema cargando el plan. Probá recargar la página.";
+
 export default function App() {
   const [person, setPerson] = useState("angel");
   const [tab, setTab] = useState("plan");
@@ -32,19 +36,28 @@ export default function App() {
   const [equivalences, setEquivalences] = useState(null);
   const [variety, setVariety] = useState(null);
   const [shopping, setShopping] = useState(null);
+  const [error, setError] = useState(null);
 
-  useEffect(() => subscribeProfiles((key, data) => setProfiles((p) => ({ ...p, [key]: data }))), []);
-  useEffect(() => subscribeDays("angel", (d) => setDays((s) => ({ ...s, angel: d }))), []);
-  useEffect(() => subscribeDays("gabriela", (d) => setDays((s) => ({ ...s, gabriela: d }))), []);
-  useEffect(() => subscribeSnacks(setSnacks), []);
-  useEffect(() => subscribeInterchangeable("angel", (d) => setInter((s) => ({ ...s, angel: d }))), []);
-  useEffect(() => subscribeInterchangeable("gabriela", (d) => setInter((s) => ({ ...s, gabriela: d }))), []);
-  useEffect(() => subscribeEquivalences(setEquivalences), []);
-  useEffect(() => subscribeVariety(setVariety), []);
-  useEffect(() => subscribeShopping(setShopping), []);
+  useEffect(() => subscribeProfiles((key, data) => setProfiles((p) => ({ ...p, [key]: data })), () => setError(LOAD_ERROR_MESSAGE)), []);
+  useEffect(() => subscribeDays("angel", (d) => setDays((s) => ({ ...s, angel: d })), () => setError(LOAD_ERROR_MESSAGE)), []);
+  useEffect(() => subscribeDays("gabriela", (d) => setDays((s) => ({ ...s, gabriela: d })), () => setError(LOAD_ERROR_MESSAGE)), []);
+  useEffect(() => subscribeSnacks(setSnacks, () => setError(LOAD_ERROR_MESSAGE)), []);
+  useEffect(() => subscribeInterchangeable("angel", (d) => setInter((s) => ({ ...s, angel: d })), () => setError(LOAD_ERROR_MESSAGE)), []);
+  useEffect(() => subscribeInterchangeable("gabriela", (d) => setInter((s) => ({ ...s, gabriela: d })), () => setError(LOAD_ERROR_MESSAGE)), []);
+  useEffect(() => subscribeEquivalences(setEquivalences, () => setError(LOAD_ERROR_MESSAGE)), []);
+  useEffect(() => subscribeVariety(setVariety, () => setError(LOAD_ERROR_MESSAGE)), []);
+  useEffect(() => subscribeShopping(setShopping, () => setError(LOAD_ERROR_MESSAGE)), []);
 
   const profile = profiles[person];
   const personDays = days[person];
+
+  if (error) {
+    return (
+      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#F7F4EC", fontFamily: "'Inter', sans-serif", color: "#6B6459", textAlign: "center", padding: 24 }}>
+        {error}
+      </div>
+    );
+  }
 
   if (!profile || !personDays) {
     return (
@@ -94,7 +107,7 @@ export default function App() {
                 gap: 2,
               }}
             >
-              {Object.keys(profiles).map((key) => (
+              {PERSON_KEYS.filter((key) => profiles[key]).map((key) => (
                 <button
                   key={key}
                   onClick={() => { setPerson(key); setDayIdx(0); }}
