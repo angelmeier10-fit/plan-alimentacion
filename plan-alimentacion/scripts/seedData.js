@@ -278,7 +278,13 @@ export const RECIPES = [
   {
     title: "Tortilla de claras con espinaca",
     tag: "Desayuno",
-    ingredients: ["4 claras + 1 huevo entero", "1 puñado de espinaca fresca", "Sal, pimienta", "1 cdita de aceite de oliva", "1 rodaja de pan integral"],
+    ingredients: [
+  { item: "claras + huevo entero", angel: "4 claras + 1 huevo entero", gabriela: "3 claras + 1 huevo entero" },
+  { item: "espinaca fresca", angel: "1 puñado grande", gabriela: "1 puñado" },
+  { item: "sal, pimienta", angel: "a gusto", gabriela: "a gusto" },
+  { item: "aceite de oliva", angel: "1 cdita", gabriela: "1 cdita" },
+  { item: "pan integral", angel: "2 rodajas", gabriela: "1 rodaja" },
+],
     steps: [
       "Saltear la espinaca en la sartén con el aceite hasta que se ablande.",
       "Batir los huevos con sal y pimienta.",
@@ -289,7 +295,13 @@ export const RECIPES = [
   {
     title: "Pollo al horno con batatas y ensalada",
     tag: "Almuerzo",
-    ingredients: ["200g de pechuga de pollo", "1 batata mediana", "Ensalada verde grande", "1 cda de aceite de oliva", "Orégano, sal, pimienta"],
+    ingredients: [
+  { item: "pechuga de pollo", angel: "200g", gabriela: "150g" },
+  { item: "batata", angel: "1 batata mediana", gabriela: "1 batata chica" },
+  { item: "ensalada verde", angel: "grande", gabriela: "grande" },
+  { item: "aceite de oliva", angel: "1 cda", gabriela: "1 cdita" },
+  { item: "orégano, sal, pimienta", angel: "a gusto", gabriela: "a gusto" },
+],
     steps: [
       "Cortar la batata en cubos y condimentar con aceite, sal y orégano.",
       "Llevar al horno a 200°C junto con el pollo condimentado, 25-30 minutos.",
@@ -300,7 +312,12 @@ export const RECIPES = [
   {
     title: "Yogur con avena y frutos secos",
     tag: "Merienda",
-    ingredients: ["200g de yogur casero", "40g de avena en hojuelas", "30g de nueces o almendras", "Canela a gusto"],
+    ingredients: [
+  { item: "yogur casero", angel: "200g", gabriela: "150g" },
+  { item: "avena en hojuelas", angel: "40g", gabriela: "25g" },
+  { item: "nueces o almendras", angel: "30g", gabriela: "20g" },
+  { item: "canela", angel: "a gusto", gabriela: "a gusto" },
+],
     steps: [
       "Mezclar el yogur con la avena en un bowl.",
       "Dejar reposar 5 minutos para que la avena se hidrate un poco.",
@@ -310,7 +327,13 @@ export const RECIPES = [
   {
     title: "Salmón con puré de calabaza y brócoli",
     tag: "Cena",
-    ingredients: ["180g de salmón", "200g de calabaza", "150g de brócoli", "1 cdita de aceite de oliva", "Sal, pimienta, limón"],
+    ingredients: [
+  { item: "salmón", angel: "180g", gabriela: "130g" },
+  { item: "calabaza", angel: "200g", gabriela: "150g" },
+  { item: "brócoli", angel: "150g", gabriela: "100g" },
+  { item: "aceite de oliva", angel: "1 cdita", gabriela: "1 cdita" },
+  { item: "sal, pimienta, limón", angel: "a gusto", gabriela: "a gusto" },
+],
     steps: [
       "Hervir o cocinar al vapor la calabaza hasta que esté blanda y hacer puré.",
       "Cocinar el brócoli al vapor 5-7 minutos.",
@@ -321,7 +344,13 @@ export const RECIPES = [
   {
     title: "Bowl de arroz integral con atún y verduras",
     tag: "Almuerzo",
-    ingredients: ["80g de arroz integral cocido", "1 lata de atún al natural", "Verduras variadas (zanahoria, morrón, cebolla)", "1 cda de aceite de oliva", "Sal, limón"],
+    ingredients: [
+  { item: "arroz integral cocido", angel: "80g", gabriela: "60g" },
+  { item: "atún al natural", angel: "1 lata", gabriela: "1 lata" },
+  { item: "verduras variadas (zanahoria, morrón, cebolla)", angel: "a gusto", gabriela: "a gusto" },
+  { item: "aceite de oliva", angel: "1 cda", gabriela: "1 cdita" },
+  { item: "sal, limón", angel: "a gusto", gabriela: "a gusto" },
+],
     steps: [
       "Cortar las verduras en juliana fina y saltearlas 3-4 minutos.",
       "Mezclar el arroz cocido con las verduras salteadas.",
@@ -332,7 +361,13 @@ export const RECIPES = [
   {
     title: "Panqueques de avena y banana",
     tag: "Desayuno",
-    ingredients: ["1 banana madura", "2 huevos", "40g de avena en hojuelas", "Canela a gusto", "Aceite en spray para la sartén"],
+    ingredients: [
+  { item: "banana madura", angel: "1 banana mediana", gabriela: "1 banana chica" },
+  { item: "huevos", angel: "2 huevos", gabriela: "1 huevo + 1 clara" },
+  { item: "avena en hojuelas", angel: "40g", gabriela: "25g" },
+  { item: "canela", angel: "a gusto", gabriela: "a gusto" },
+  { item: "aceite en spray", angel: "a gusto", gabriela: "a gusto" },
+],
     steps: [
       "Pisar la banana y mezclar con los huevos y la avena hasta formar una masa homogénea.",
       "Agregar canela a gusto.",
