@@ -23,7 +23,7 @@ import { readFileSync } from "node:fs";
 import { initializeApp, cert } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
 import {
-  PROFILES, DAYS, SNACKS, INTERCHANGEABLE, EQUIVALENCES, VARIETY, SHOPPING,
+  PROFILES, DAYS, SNACKS, INTERCHANGEABLE, EQUIVALENCES, VARIETY, SHOPPING, RECIPES,
 } from "./seedData.js";
 
 const credentialsPath = process.env.GOOGLE_APPLICATION_CREDENTIALS;
@@ -73,6 +73,9 @@ async function seed() {
 
   await db.doc("shopping/main").set({ list: SHOPPING });
   console.log("shopping/main ok");
+
+  await db.doc("recipes/main").set({ list: RECIPES });
+  console.log("recipes/main ok");
 
   console.log("Seed completo.");
   process.exit(0);
