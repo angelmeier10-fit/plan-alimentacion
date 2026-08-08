@@ -90,6 +90,13 @@ export function subscribeShopping(cb, onError) {
   );
 }
 
-export function subscribeRecipes(cb) {
-  return onSnapshot(doc(db, "recipes", "main"), (snap) => cb(snap.data()?.list ?? []));
+export function subscribeRecipes(cb, onError) {
+  return onSnapshot(
+    doc(db, "recipes", "main"),
+    (snap) => cb(snap.data()?.list ?? []),
+    (err) => {
+      console.error("subscribeRecipes error:", err);
+      onError?.(err);
+    }
+  );
 }
