@@ -89,3 +89,7 @@ export function subscribeShopping(cb, onError) {
     }
   );
 }
+
+export function subscribeRecipes(cb) {
+  return onSnapshot(doc(db, "recipes", "main"), (snap) => cb(snap.data()?.list ?? []));
+}
