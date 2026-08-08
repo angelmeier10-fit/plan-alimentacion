@@ -175,7 +175,7 @@ export default function App() {
           )}
           {tab === "extra" && <ExtraTab accent={profile.accent} person={person} />}
           {tab === "compras" && shopping && <ComprasTab data={shopping} accent={profile.accent} />}
-          {tab === "recetas" && recipes && <RecetasTab data={recipes} accent={profile.accent} />}
+          {tab === "recetas" && recipes && <RecetasTab data={recipes} accent={profile.accent} person={person} />}
         </div>
 
         {/* BOTTOM NAV */}
