@@ -19,7 +19,7 @@ export default function RecetasTab({ data, accent, person }) {
           </div>
           <ul style={{ margin: "0 0 12px", paddingLeft: 18, fontSize: 14, lineHeight: 1.5 }}>
             {recipe.ingredients.map((ing) => (
-              <li key={ing.item}>{ing[person]} de {ing.item}</li>
+              <li key={ing.item}>{ing[person]}</li>
             ))}
           </ul>
           <div style={{ fontSize: 13, fontWeight: 600, color: "#6B6459", marginBottom: 4 }}>
