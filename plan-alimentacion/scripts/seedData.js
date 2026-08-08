@@ -273,3 +273,70 @@ export const SHOPPING = [
   },
   { cat: "Grasas y otros", icon: "Sparkles", items: ["Aceite de oliva virgen extra", "Gelatina light", "Chicle sin azúcar"] },
 ];
+
+export const RECIPES = [
+  {
+    title: "Tortilla de claras con espinaca",
+    tag: "Desayuno",
+    ingredients: ["4 claras + 1 huevo entero", "1 puñado de espinaca fresca", "Sal, pimienta", "1 cdita de aceite de oliva", "1 rodaja de pan integral"],
+    steps: [
+      "Saltear la espinaca en la sartén con el aceite hasta que se ablande.",
+      "Batir los huevos con sal y pimienta.",
+      "Volcar el batido sobre la espinaca y cocinar a fuego medio-bajo, tapado, hasta que cuaje.",
+      "Doblar por la mitad y servir con el pan tostado.",
+    ],
+  },
+  {
+    title: "Pollo al horno con batatas y ensalada",
+    tag: "Almuerzo",
+    ingredients: ["200g de pechuga de pollo", "1 batata mediana", "Ensalada verde grande", "1 cda de aceite de oliva", "Orégano, sal, pimienta"],
+    steps: [
+      "Cortar la batata en cubos y condimentar con aceite, sal y orégano.",
+      "Llevar al horno a 200°C junto con el pollo condimentado, 25-30 minutos.",
+      "Dar vuelta el pollo a mitad de cocción.",
+      "Servir con la ensalada verde aparte.",
+    ],
+  },
+  {
+    title: "Yogur con avena y frutos secos",
+    tag: "Merienda",
+    ingredients: ["200g de yogur casero", "40g de avena en hojuelas", "30g de nueces o almendras", "Canela a gusto"],
+    steps: [
+      "Mezclar el yogur con la avena en un bowl.",
+      "Dejar reposar 5 minutos para que la avena se hidrate un poco.",
+      "Agregar los frutos secos picados y canela por encima.",
+    ],
+  },
+  {
+    title: "Salmón con puré de calabaza y brócoli",
+    tag: "Cena",
+    ingredients: ["180g de salmón", "200g de calabaza", "150g de brócoli", "1 cdita de aceite de oliva", "Sal, pimienta, limón"],
+    steps: [
+      "Hervir o cocinar al vapor la calabaza hasta que esté blanda y hacer puré.",
+      "Cocinar el brócoli al vapor 5-7 minutos.",
+      "Sellar el salmón en sartén con el aceite, 3-4 minutos por lado.",
+      "Servir con el puré, el brócoli y unas gotas de limón.",
+    ],
+  },
+  {
+    title: "Bowl de arroz integral con atún y verduras",
+    tag: "Almuerzo",
+    ingredients: ["80g de arroz integral cocido", "1 lata de atún al natural", "Verduras variadas (zanahoria, morrón, cebolla)", "1 cda de aceite de oliva", "Sal, limón"],
+    steps: [
+      "Cortar las verduras en juliana fina y saltearlas 3-4 minutos.",
+      "Mezclar el arroz cocido con las verduras salteadas.",
+      "Agregar el atún escurrido por encima.",
+      "Condimentar con aceite, sal y limón.",
+    ],
+  },
+  {
+    title: "Panqueques de avena y banana",
+    tag: "Desayuno",
+    ingredients: ["1 banana madura", "2 huevos", "40g de avena en hojuelas", "Canela a gusto", "Aceite en spray para la sartén"],
+    steps: [
+      "Pisar la banana y mezclar con los huevos y la avena hasta formar una masa homogénea.",
+      "Agregar canela a gusto.",
+      "Cocinar de a cucharones en sartén antiadherente a fuego medio, 2-3 minutos por lado.",
+    ],
+  },
+];
