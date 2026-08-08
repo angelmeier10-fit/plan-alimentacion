@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 import {
-  Sunrise, Carrot, ArrowLeftRight, Sparkles, ShoppingBasket,
+  Sunrise, Carrot, ArrowLeftRight, Sparkles, ShoppingBasket, BookOpen,
 } from "lucide-react";
 import {
   subscribeProfiles, subscribeDays, subscribeSnacks,
   subscribeInterchangeable, subscribeEquivalences, subscribeVariety, subscribeShopping,
+  subscribeRecipes,
 } from "./firestoreApi.js";
 import PlanTab from "./tabs/PlanTab.jsx";
 import SnacksTab from "./tabs/SnacksTab.jsx";
 import FlexTab from "./tabs/FlexTab.jsx";
 import ExtraTab from "./tabs/ExtraTab.jsx";
 import ComprasTab from "./tabs/ComprasTab.jsx";
+import RecetasTab from "./tabs/RecetasTab.jsx";
 
 const TABS = [
   { id: "plan", label: "Plan", icon: Sunrise },
@@ -18,6 +20,7 @@ const TABS = [
   { id: "flex", label: "Flexible", icon: ArrowLeftRight },
   { id: "extra", label: "Extras", icon: Sparkles },
   { id: "compras", label: "Compras", icon: ShoppingBasket },
+  { id: "recetas", label: "Recetas", icon: BookOpen },
 ];
 
 const PERSON_KEYS = ["angel", "gabriela"];
@@ -36,6 +39,7 @@ export default function App() {
   const [equivalences, setEquivalences] = useState(null);
   const [variety, setVariety] = useState(null);
   const [shopping, setShopping] = useState(null);
+  const [recipes, setRecipes] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => subscribeProfiles((key, data) => setProfiles((p) => ({ ...p, [key]: data })), () => setError(LOAD_ERROR_MESSAGE)), []);
@@ -47,6 +51,7 @@ export default function App() {
   useEffect(() => subscribeEquivalences(setEquivalences, () => setError(LOAD_ERROR_MESSAGE)), []);
   useEffect(() => subscribeVariety(setVariety, () => setError(LOAD_ERROR_MESSAGE)), []);
   useEffect(() => subscribeShopping(setShopping, () => setError(LOAD_ERROR_MESSAGE)), []);
+  useEffect(() => subscribeRecipes(setRecipes, () => setError(LOAD_ERROR_MESSAGE)), []);
 
   const profile = profiles[person];
   const personDays = days[person];
@@ -170,6 +175,7 @@ export default function App() {
           )}
           {tab === "extra" && <ExtraTab accent={profile.accent} person={person} />}
           {tab === "compras" && shopping && <ComprasTab data={shopping} accent={profile.accent} />}
+          {tab === "recetas" && recipes && <RecetasTab data={recipes} accent={profile.accent} />}
         </div>
 
         {/* BOTTOM NAV */}
