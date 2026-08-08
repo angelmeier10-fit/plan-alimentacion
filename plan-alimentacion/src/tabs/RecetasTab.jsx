@@ -2,7 +2,7 @@ import Card from "../components/Card.jsx";
 import SectionTitle from "../components/SectionTitle.jsx";
 import Pill from "../components/Pill.jsx";
 
-export default function RecetasTab({ data, accent }) {
+export default function RecetasTab({ data, accent, person }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
       <SectionTitle sub="Ideas para variar el menú">Recetas</SectionTitle>
@@ -19,7 +19,7 @@ export default function RecetasTab({ data, accent }) {
           </div>
           <ul style={{ margin: "0 0 12px", paddingLeft: 18, fontSize: 14, lineHeight: 1.5 }}>
             {recipe.ingredients.map((ing) => (
-              <li key={ing}>{ing}</li>
+              <li key={ing.item}>{ing[person]} de {ing.item}</li>
             ))}
           </ul>
           <div style={{ fontSize: 13, fontWeight: 600, color: "#6B6459", marginBottom: 4 }}>
