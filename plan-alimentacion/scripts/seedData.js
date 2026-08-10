@@ -374,4 +374,38 @@ export const RECIPES = [
       "Cocinar de a cucharones en sartén antiadherente a fuego medio, 2-3 minutos por lado.",
     ],
   },
+  {
+    title: "Barritas de avena y frutos secos",
+    tag: "Merienda",
+    ingredients: [
+      { item: "avena", angel: "100g de avena en hojuelas", gabriela: "80g de avena en hojuelas" },
+      { item: "frutos-secos", angel: "50g de nueces o almendras picadas", gabriela: "40g de nueces o almendras picadas" },
+      { item: "banana", angel: "1 banana madura", gabriela: "1 banana madura" },
+      { item: "manteca-mani", angel: "1 cda de manteca de maní natural", gabriela: "1 cdita de manteca de maní natural" },
+      { item: "canela", angel: "Canela a gusto", gabriela: "Canela a gusto" },
+    ],
+    steps: [
+      "Precalentar el horno a 180°C y forrar un molde chico con papel manteca.",
+      "Pisar la banana y mezclar con la manteca de maní hasta integrar.",
+      "Agregar la avena, los frutos secos picados y la canela, mezclar bien.",
+      "Volcar en el molde, presionar bien para compactar y hornear 15-20 minutos.",
+      "Dejar enfriar por completo antes de cortar en barritas.",
+    ],
+  },
+  {
+    title: "Bolitas energéticas de pasas y frutos secos",
+    tag: "Merienda",
+    ingredients: [
+      { item: "pasas-uva", angel: "80g de pasas de uva", gabriela: "60g de pasas de uva" },
+      { item: "frutos-secos", angel: "40g de nueces o almendras", gabriela: "30g de nueces o almendras" },
+      { item: "cacao-amargo", angel: "1 cda de cacao amargo en polvo", gabriela: "1 cdita de cacao amargo en polvo" },
+      { item: "coco-rallado", angel: "Coco rallado para rebozar a gusto", gabriela: "Coco rallado para rebozar a gusto" },
+    ],
+    steps: [
+      "Procesar las pasas de uva con los frutos secos hasta formar una pasta pegajosa.",
+      "Agregar el cacao amargo y mezclar bien.",
+      "Formar bolitas pequeñas con las manos.",
+      "Rebozar en coco rallado y llevar a la heladera al menos 30 minutos antes de comer.",
+    ],
+  },
 ];
