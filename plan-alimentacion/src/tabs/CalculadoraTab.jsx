@@ -82,7 +82,7 @@ function MacroRow({ label, value, target, unit, colorHex }) {
   );
 }
 
-export default function CalculadoraTab({ person, profile, accent }) {
+export default function CalculadoraTab({ person, profile, accent, onLoadError }) {
   const [customFoods, setCustomFoods] = useState([]);
   const [dateStr, setDateStr] = useState(todayStr());
   const [entries, setEntries] = useState([]);
@@ -94,11 +94,20 @@ export default function CalculadoraTab({ person, profile, accent }) {
   const [editingId, setEditingId] = useState(null);
   const [editGrams, setEditGrams] = useState("");
 
-  useEffect(() => subscribeCustomFoods(setCustomFoods, (err) => console.error(err)), []);
   useEffect(
-    () => subscribeMacroLog(person, dateStr, setEntries, (err) => console.error(err)),
-    [person, dateStr]
+    () => subscribeCustomFoods(setCustomFoods, (err) => {
+      console.error(err);
+      onLoadError?.(err);
+    }),
+    []
   );
+  useEffect(() => {
+    setEntries([]);
+    return subscribeMacroLog(person, dateStr, setEntries, (err) => {
+      console.error(err);
+      onLoadError?.(err);
+    });
+  }, [person, dateStr]);
 
   const foods = useMemo(() => [...BASE_FOODS, ...customFoods], [customFoods]);
 
@@ -150,10 +159,13 @@ export default function CalculadoraTab({ person, profile, accent }) {
       name: name.trim(),
       kcal: Number(kcal), prot: Number(prot), fat: Number(fat), carb: Number(carb),
     };
-    addCustomFood(food).catch((err) => console.error("addCustomFood error:", err));
-    setSelectedFoodId(food.id);
-    setNewFood({ name: "", kcal: "", prot: "", fat: "", carb: "" });
-    setShowAddFood(false);
+    addCustomFood(food)
+      .then(() => {
+        setSelectedFoodId(food.id);
+        setNewFood({ name: "", kcal: "", prot: "", fat: "", carb: "" });
+        setShowAddFood(false);
+      })
+      .catch((err) => console.error("addCustomFood error:", err));
   };
 
   const inputStyle = {

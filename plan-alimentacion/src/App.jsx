@@ -179,7 +179,7 @@ export default function App() {
           {tab === "compras" && shopping && <ComprasTab data={shopping} accent={profile.accent} />}
           {tab === "recetas" && recipes && <RecetasTab data={recipes} accent={profile.accent} person={person} />}
           {tab === "calculadora" && (
-            <CalculadoraTab person={person} profile={profile} accent={profile.accent} />
+            <CalculadoraTab person={person} profile={profile} accent={profile.accent} onLoadError={() => setError(LOAD_ERROR_MESSAGE)} />
           )}
         </div>
 
