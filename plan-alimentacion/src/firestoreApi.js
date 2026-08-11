@@ -1,5 +1,5 @@
 // plan-alimentacion/src/firestoreApi.js
-import { collection, doc, onSnapshot, query } from "firebase/firestore";
+import { collection, doc, onSnapshot, query, setDoc, getDoc, arrayUnion } from "firebase/firestore";
 import { db } from "./firebaseConfig.js";
 
 export function subscribeProfiles(cb, onError) {
@@ -99,4 +99,54 @@ export function subscribeRecipes(cb, onError) {
       onError?.(err);
     }
   );
+}
+
+export function subscribeCustomFoods(cb, onError) {
+  return onSnapshot(
+    doc(db, "foods", "custom"),
+    (snap) => cb(snap.data()?.list ?? []),
+    (err) => {
+      console.error("subscribeCustomFoods error:", err);
+      onError?.(err);
+    }
+  );
+}
+
+export async function addCustomFood(food) {
+  await setDoc(doc(db, "foods", "custom"), { list: arrayUnion(food) }, { merge: true });
+}
+
+export function subscribeMacroLog(person, dateStr, cb, onError) {
+  return onSnapshot(
+    doc(db, "macroLogs", person, "days", dateStr),
+    (snap) => cb(snap.data()?.entries ?? []),
+    (err) => {
+      console.error("subscribeMacroLog error:", err);
+      onError?.(err);
+    }
+  );
+}
+
+export async function addLogEntry(person, dateStr, entry) {
+  await setDoc(
+    doc(db, "macroLogs", person, "days", dateStr),
+    { entries: arrayUnion(entry) },
+    { merge: true }
+  );
+}
+
+export async function updateLogEntry(person, dateStr, entryId, grams) {
+  const ref = doc(db, "macroLogs", person, "days", dateStr);
+  const snap = await getDoc(ref);
+  const entries = snap.data()?.entries ?? [];
+  const next = entries.map((e) => (e.id === entryId ? { ...e, grams } : e));
+  await setDoc(ref, { entries: next });
+}
+
+export async function deleteLogEntry(person, dateStr, entryId) {
+  const ref = doc(db, "macroLogs", person, "days", dateStr);
+  const snap = await getDoc(ref);
+  const entries = snap.data()?.entries ?? [];
+  const next = entries.filter((e) => e.id !== entryId);
+  await setDoc(ref, { entries: next });
 }
