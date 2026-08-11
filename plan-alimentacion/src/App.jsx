@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
-  Sunrise, Carrot, ArrowLeftRight, Sparkles, ShoppingBasket, BookOpen,
+  Sunrise, Carrot, ArrowLeftRight, Sparkles, ShoppingBasket, BookOpen, Flame,
 } from "lucide-react";
 import {
   subscribeProfiles, subscribeDays, subscribeSnacks,
@@ -13,6 +13,7 @@ import FlexTab from "./tabs/FlexTab.jsx";
 import ExtraTab from "./tabs/ExtraTab.jsx";
 import ComprasTab from "./tabs/ComprasTab.jsx";
 import RecetasTab from "./tabs/RecetasTab.jsx";
+import CalculadoraTab from "./tabs/CalculadoraTab.jsx";
 
 const TABS = [
   { id: "plan", label: "Plan", icon: Sunrise },
@@ -21,6 +22,7 @@ const TABS = [
   { id: "extra", label: "Extras", icon: Sparkles },
   { id: "compras", label: "Compras", icon: ShoppingBasket },
   { id: "recetas", label: "Recetas", icon: BookOpen },
+  { id: "calculadora", label: "Calculadora", icon: Flame },
 ];
 
 const PERSON_KEYS = ["angel", "gabriela"];
@@ -176,6 +178,9 @@ export default function App() {
           {tab === "extra" && <ExtraTab accent={profile.accent} person={person} />}
           {tab === "compras" && shopping && <ComprasTab data={shopping} accent={profile.accent} />}
           {tab === "recetas" && recipes && <RecetasTab data={recipes} accent={profile.accent} person={person} />}
+          {tab === "calculadora" && (
+            <CalculadoraTab person={person} profile={profile} accent={profile.accent} />
+          )}
         </div>
 
         {/* BOTTOM NAV */}
