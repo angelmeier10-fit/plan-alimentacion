@@ -91,6 +91,8 @@ export default function CalculadoraTab({ person, profile, accent, onLoadError })
   const [grams, setGrams] = useState(100);
   const [showAddFood, setShowAddFood] = useState(false);
   const [newFood, setNewFood] = useState({ name: "", kcal: "", prot: "", fat: "", carb: "" });
+  const [showManualMeal, setShowManualMeal] = useState(false);
+  const [manualMeal, setManualMeal] = useState({ name: "", kcal: "", prot: "", fat: "", carb: "" });
   const [editingId, setEditingId] = useState(null);
   const [editGrams, setEditGrams] = useState("");
 
@@ -143,6 +145,9 @@ export default function CalculadoraTab({ person, profile, accent, onLoadError })
 
   const totals = entries.reduce(
     (acc, e) => {
+      if (e.manual) {
+        return { kcal: acc.kcal + e.kcal, prot: acc.prot + e.prot, fat: acc.fat + e.fat, carb: acc.carb + e.carb };
+      }
       const food = foods.find((f) => f.id === e.foodId);
       if (!food) return acc;
       const s = scale(food, e.grams);
@@ -166,6 +171,26 @@ export default function CalculadoraTab({ person, profile, accent, onLoadError })
         setShowAddFood(false);
       })
       .catch((err) => console.error("addCustomFood error:", err));
+  };
+
+  const submitManualMeal = () => {
+    const { name, kcal, prot, fat, carb } = manualMeal;
+    if (!name.trim() || kcal === "") return;
+    const entry = {
+      id: String(Date.now()),
+      name: name.trim(),
+      manual: true,
+      kcal: Number(kcal),
+      prot: Number(prot || 0),
+      fat: Number(fat || 0),
+      carb: Number(carb || 0),
+    };
+    addLogEntry(person, dateStr, entry)
+      .then(() => {
+        setManualMeal({ name: "", kcal: "", prot: "", fat: "", carb: "" });
+        setShowManualMeal(false);
+      })
+      .catch((err) => console.error("addLogEntry error:", err));
   };
 
   const inputStyle = {
@@ -245,12 +270,50 @@ export default function CalculadoraTab({ person, profile, accent, onLoadError })
         </p>
       )}
 
-      <button
-        onClick={() => setShowAddFood((s) => !s)}
-        style={{ border: "none", background: "none", color: "#6B6459", fontSize: 12.5, fontWeight: 600, cursor: "pointer", marginBottom: 12 }}
-      >
-        {showAddFood ? "Cancelar" : "+ Agregar alimento nuevo a la base"}
-      </button>
+      <div style={{ display: "flex", gap: 16, marginBottom: 12 }}>
+        <button
+          onClick={() => setShowAddFood((s) => !s)}
+          style={{ border: "none", background: "none", color: "#6B6459", fontSize: 12.5, fontWeight: 600, cursor: "pointer" }}
+        >
+          {showAddFood ? "Cancelar" : "+ Agregar alimento nuevo a la base"}
+        </button>
+        <button
+          onClick={() => setShowManualMeal((s) => !s)}
+          style={{ border: "none", background: "none", color: "#6B6459", fontSize: 12.5, fontWeight: 600, cursor: "pointer" }}
+        >
+          {showManualMeal ? "Cancelar" : "+ Comida puntual"}
+        </button>
+      </div>
+
+      {showManualMeal && (
+        <div style={{ border: "1px solid #ECE8DF", background: "#fff", borderRadius: 12, padding: 14, marginBottom: 18 }}>
+          <input
+            placeholder="Nombre (ej: Sushi)"
+            value={manualMeal.name}
+            onChange={(e) => setManualMeal({ ...manualMeal, name: e.target.value })}
+            style={{ ...inputStyle, marginBottom: 8 }}
+          />
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 8, marginBottom: 8 }}>
+            {["kcal", "prot", "fat", "carb"].map((k) => (
+              <input
+                key={k}
+                type="number"
+                placeholder={k === "fat" ? "grasa" : k === "carb" ? "carbo" : k === "kcal" ? "kcal *" : k}
+                value={manualMeal[k]}
+                onChange={(e) => setManualMeal({ ...manualMeal, [k]: e.target.value })}
+                style={{ ...inputStyle, padding: "8px 10px" }}
+              />
+            ))}
+          </div>
+          <p style={{ fontSize: 11, color: "#B3AC9C", marginBottom: 8 }}>Solo calorías es obligatorio. Se suma al día de hoy, sin guardarse en la base de alimentos.</p>
+          <button
+            onClick={submitManualMeal}
+            style={{ padding: "8px 14px", background: "#1C1B19", color: "#fff", fontSize: 12.5, fontWeight: 600, borderRadius: 10, border: "none", cursor: "pointer" }}
+          >
+            Agregar al día
+          </button>
+        </div>
+      )}
 
       {showAddFood && (
         <div style={{ border: "1px solid #ECE8DF", background: "#fff", borderRadius: 12, padding: 14, marginBottom: 18 }}>
@@ -302,7 +365,14 @@ export default function CalculadoraTab({ person, profile, accent, onLoadError })
           <div style={{ marginTop: 12, paddingTop: 12, borderTop: "1px solid #F1EEE5" }}>
             {entries.map((e) => (
               <div key={e.id} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", fontSize: 13, padding: "6px 0" }}>
-                {editingId === e.id ? (
+                {e.manual ? (
+                  <>
+                    <span style={{ color: "#1C1B19" }}>{e.name}</span>
+                    <button onClick={() => handleDeleteEntry(e.id)} style={{ border: "none", background: "none", color: "#B3AC9C", cursor: "pointer" }}>
+                      <Trash2 size={13} />
+                    </button>
+                  </>
+                ) : editingId === e.id ? (
                   <>
                     <input
                       type="number"
