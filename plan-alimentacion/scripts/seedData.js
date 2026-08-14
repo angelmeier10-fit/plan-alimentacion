@@ -408,4 +408,56 @@ export const RECIPES = [
       "Rebozar en coco rallado y llevar a la heladera al menos 30 minutos antes de comer.",
     ],
   },
+  {
+    title: "Hamburguesas de carne",
+    tag: "Cena",
+    ingredients: [
+      { item: "carne-picada", angel: "500g de carne picada magra (rinde 4 hamburguesas de 120g)", gabriela: "500g de carne picada magra (rinde 4 hamburguesas de 120g)" },
+      { item: "huevo", angel: "1 huevo", gabriela: "1 huevo" },
+      { item: "avena", angel: "1 cda de avena (opcional, para ligar)", gabriela: "1 cda de avena (opcional, para ligar)" },
+      { item: "condimentos", angel: "Sal, pimienta, orégano, ajo en polvo a gusto", gabriela: "Sal, pimienta, orégano, ajo en polvo a gusto" },
+    ],
+    steps: [
+      "Mezclar la carne picada con el huevo, la avena y los condimentos.",
+      "Formar 4 hamburguesas de ~120g cada una.",
+      "Cocinar en plancha o parrilla 4-5 minutos por lado.",
+    ],
+  },
+  {
+    title: "Hamburguesas de pollo",
+    tag: "Cena",
+    ingredients: [
+      { item: "pollo-molido", angel: "500g de pechuga de pollo molida o procesada (rinde 4 hamburguesas de 120g)", gabriela: "500g de pechuga de pollo molida o procesada (rinde 4 hamburguesas de 120g)" },
+      { item: "huevo", angel: "1 huevo", gabriela: "1 huevo" },
+      { item: "ajo", angel: "1 diente de ajo picado", gabriela: "1 diente de ajo picado" },
+      { item: "avena", angel: "30g de avena (opcional, para dar cuerpo)", gabriela: "30g de avena (opcional, para dar cuerpo)" },
+      { item: "condimentos", angel: "Perejil, sal, pimentón a gusto", gabriela: "Perejil, sal, pimentón a gusto" },
+    ],
+    steps: [
+      "Mezclar el pollo molido con huevo, ajo, avena y condimentos.",
+      "Formar 4 hamburguesas de ~120g cada una.",
+      "Cocinar en plancha 4-5 minutos por lado hasta cocción completa.",
+    ],
+  },
+  {
+    title: "Guiso de lentejas con pollo",
+    tag: "Almuerzo",
+    ingredients: [
+      { item: "lentejas", angel: "300g de lentejas secas (rinde 4 porciones)", gabriela: "300g de lentejas secas (rinde 4 porciones)" },
+      { item: "pollo", angel: "300g de pechuga de pollo en cubos", gabriela: "300g de pechuga de pollo en cubos" },
+      { item: "cebolla", angel: "1 cebolla", gabriela: "1 cebolla" },
+      { item: "zanahoria", angel: "1 zanahoria", gabriela: "1 zanahoria" },
+      { item: "morron", angel: "1 morrón", gabriela: "1 morrón" },
+      { item: "ajo", angel: "2 dientes de ajo", gabriela: "2 dientes de ajo" },
+      { item: "aceite", angel: "1 cda de aceite", gabriela: "1 cda de aceite" },
+      { item: "condimentos", angel: "Caldo o agua, sal, comino, laurel a gusto", gabriela: "Caldo o agua, sal, comino, laurel a gusto" },
+    ],
+    steps: [
+      "Remojar las lentejas un par de horas (opcional, acelera la cocción).",
+      "Rehogar cebolla, ajo y verduras en el aceite.",
+      "Agregar el pollo y sellar.",
+      "Sumar las lentejas y cubrir con agua o caldo.",
+      "Cocinar 30-35 minutos hasta que las lentejas estén tiernas.",
+    ],
+  },
 ];
