@@ -31,7 +31,7 @@ export default function PlanTab({ days, dayIdx, setDayIdx, accent, accentSoft })
 
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         {day.meals.map((meal) => {
-          const Icon = MEAL_ICON[meal.m];
+          const Icon = MEAL_ICON[meal.m.split(" ")[0]];
           return (
             <Card key={meal.m}>
               <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
