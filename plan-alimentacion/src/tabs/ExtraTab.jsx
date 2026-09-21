@@ -56,16 +56,38 @@ export default function ExtraTab({ accent, person }) {
         </p>
       </Card>
 
-      <SectionTitle>Si agregás un WOD suelto</SectionTitle>
-      <Card>
-        <p style={{ margin: "0 0 8px", fontSize: 13, lineHeight: 1.55, color: "#4A453C" }}>
-          Parche para un WOD ocasional (no para sumarlo todos los días). Sumá 30-50g extra de carbohidrato:
-        </p>
-        <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 6 }}>
-          <li style={{ display: "flex", gap: 8, fontSize: 13 }}><span style={{ color: accent }}>•</span>Antes: 1 banana extra o 20g de avena</li>
-          <li style={{ display: "flex", gap: 8, fontSize: 13 }}><span style={{ color: accent }}>•</span>Después: +30g de arroz o papa en la comida siguiente</li>
-        </ul>
-      </Card>
+      {person === "angel" ? (
+        <>
+          <SectionTitle sub="Gimnasio a las 14 h: almuerzo 12-12:30 h, merienda post-entreno">
+            Entreno y pádel
+          </SectionTitle>
+          <Card>
+            <p style={{ margin: "0 0 8px", fontSize: 13.5, fontWeight: 700 }}>Antes y durante (sesión de 1,5-2 h)</p>
+            <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 6 }}>
+              <li style={{ display: "flex", gap: 8, fontSize: 13, lineHeight: 1.5 }}><span style={{ color: accent }}>•</span>Almuerzo pre-entreno con poca grasa y fibra moderada, 1,5-2 h antes</li>
+              <li style={{ display: "flex", gap: 8, fontSize: 13, lineHeight: 1.5 }}><span style={{ color: accent }}>•</span>30-45 min antes: 1 banana o 20g de avena</li>
+              <li style={{ display: "flex", gap: 8, fontSize: 13, lineHeight: 1.5 }}><span style={{ color: accent }}>•</span>Durante: agua; si la sesión pasa de 90 min, fruta o 15-20g de carbohidrato simple</li>
+            </ul>
+            <p style={{ margin: "12px 0 8px", fontSize: 13.5, fontWeight: 700 }}>Día de pádel o doble sesión</p>
+            <p style={{ margin: 0, fontSize: 13, lineHeight: 1.55, color: "#4A453C" }}>
+              Sumá 40-60g de carbohidrato ese día: +1 banana antes y +40-60g de arroz o papa en la comida siguiente.
+            </p>
+          </Card>
+        </>
+      ) : (
+        <>
+          <SectionTitle>Si agregás un WOD suelto</SectionTitle>
+          <Card>
+            <p style={{ margin: "0 0 8px", fontSize: 13, lineHeight: 1.55, color: "#4A453C" }}>
+              Parche para un WOD ocasional (no para sumarlo todos los días). Sumá 30-50g extra de carbohidrato:
+            </p>
+            <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 6 }}>
+              <li style={{ display: "flex", gap: 8, fontSize: 13 }}><span style={{ color: accent }}>•</span>Antes: 1 banana extra o 20g de avena</li>
+              <li style={{ display: "flex", gap: 8, fontSize: 13 }}><span style={{ color: accent }}>•</span>Después: +30g de arroz o papa en la comida siguiente</li>
+            </ul>
+          </Card>
+        </>
+      )}
 
       <SectionTitle sub="Reemplaza una merienda completa, ideal 1-2 veces por semana">
         Antojo dulce: bocaditos
