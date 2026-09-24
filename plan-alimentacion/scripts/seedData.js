@@ -23,8 +23,8 @@ export const DAYS = {
       d: "Día 1",
       meals: [
         { m: "Desayuno", t: "3 huevos revueltos + 3 rodajas de pan integral tostado + 1 banana mediana." },
-        { m: "Almuerzo (pre-entreno, 12-12:30 h)", t: "200g de pechuga de pollo + 100g de arroz integral + ensalada verde grande + 1 cdita de aceite de oliva + 1 fruta aparte." },
-        { m: "Merienda (post-entreno)", t: "200g de yogur casero + 60g de avena en hojuelas + 1 banana + 30g de nueces." },
+        { m: "Almuerzo (pre-entreno, 12-12:30 h)", t: "200g de pechuga de pollo + 60g de arroz integral (crudo) + ensalada verde grande + 1 cdita de aceite de oliva + 1 fruta aparte." },
+        { m: "Merienda (post-entreno)", t: "200g de yogur casero + 80g de avena en hojuelas + 1 cda de miel + 1 banana + 30g de nueces. (En vez de miel y avena extra: 1 fruta más.)" },
         { m: "Cena", t: "180g de bife de carne vacuna magra + 250g de papa al horno + 150g de brócoli al vapor + 1 cdita de aceite de oliva." },
       ],
     },
@@ -32,8 +32,8 @@ export const DAYS = {
       d: "Día 2",
       meals: [
         { m: "Desayuno", t: "200g de yogur casero + 60g de avena + 1 banana + 30g de nueces (todo en un bol)." },
-        { m: "Almuerzo (pre-entreno, 12-12:30 h)", t: "180g de bife magro + 100g de arroz blanco + 150g de calabaza al horno + 1 cdita de aceite de oliva + 1 fruta aparte." },
-        { m: "Merienda (post-entreno)", t: "3 huevos duros + 3 rodajas de pan integral + 1 manzana verde + 1 banana." },
+        { m: "Almuerzo (pre-entreno, 12-12:30 h)", t: "180g de bife magro + 60g de arroz blanco (crudo) + 150g de calabaza al horno + 1 cdita de aceite de oliva + 1 fruta aparte." },
+        { m: "Merienda (post-entreno)", t: "3 huevos duros + 4 rodajas de pan integral + 1 cda de miel + 1 manzana verde + 1 banana. (En vez de miel y pan extra: 1 fruta más.)" },
         { m: "Cena", t: "200g de pechuga de pollo + 300g de batata al horno + ensalada grande de hojas verdes y tomate + 1 cdita de aceite de oliva." },
       ],
     },
@@ -41,8 +41,8 @@ export const DAYS = {
       d: "Día 3",
       meals: [
         { m: "Desayuno", t: "Tortilla dulce: 3 claras + 1 huevo entero + 60g de avena + banana pisada, a la sartén." },
-        { m: "Almuerzo (pre-entreno, 12-12:30 h)", t: "220g de merluza o pescado blanco + 100g de arroz integral + chauchas o brócoli + 1 cdita de aceite de oliva + 1 fruta aparte." },
-        { m: "Merienda (post-entreno)", t: "200g de yogur casero + 3 tostadas integrales + 30g de palta pisada + 1 banana." },
+        { m: "Almuerzo (pre-entreno, 12-12:30 h)", t: "220g de merluza o pescado blanco + 60g de arroz integral (crudo) + chauchas o brócoli + 1 cdita de aceite de oliva + 1 fruta aparte." },
+        { m: "Merienda (post-entreno)", t: "200g de yogur casero con 20g de avena y 1 cda de miel + 3 tostadas integrales + 30g de palta pisada + 1 banana. (En vez de miel y avena: 1 fruta más.)" },
         { m: "Cena", t: "200g de pollo picado + 110g de fideos integrales + salsa de tomate natural + ensalada grande + 1 cdita de aceite de oliva." },
       ],
     },
@@ -51,16 +51,16 @@ export const DAYS = {
       meals: [
         { m: "Desayuno", t: "3 huevos en tortilla + 3 rodajas de pan integral + 1 manzana." },
         { m: "Almuerzo (pre-entreno, 12-12:30 h)", t: "200g de pollo + 350g de papa hervida + ensalada de zanahoria y lechuga + 1 cdita de aceite de oliva." },
-        { m: "Merienda (post-entreno)", t: "200g de yogur casero + 60g de avena + 30g de almendras + 1 banana." },
-        { m: "Cena", t: "180g de bife magro + 100g de arroz blanco + zucchini y morrón a la plancha + 1 cdita de aceite de oliva." },
+        { m: "Merienda (post-entreno)", t: "200g de yogur casero + 80g de avena + 1 cda de miel + 30g de almendras + 1 banana. (En vez de miel y avena extra: 1 fruta más.)" },
+        { m: "Cena", t: "180g de bife magro + 60g de arroz blanco (crudo) + zucchini y morrón a la plancha + 1 cdita de aceite de oliva." },
       ],
     },
     {
       d: "Día 5",
       meals: [
         { m: "Desayuno", t: "Licuado: 200g de yogur + 60g de avena + banana + hielo. Acompañar con 2 huevos duros." },
-        { m: "Almuerzo (pre-entreno, 12-12:30 h)", t: "180g de bife magro + 100g de arroz integral + ensalada grande + 1 cdita de aceite de oliva + 1 fruta aparte." },
-        { m: "Merienda (post-entreno)", t: "3 rodajas de pan integral + 60g de queso port salut light + 30g de nueces + 1 banana." },
+        { m: "Almuerzo (pre-entreno, 12-12:30 h)", t: "180g de bife magro + 60g de arroz integral (crudo) + ensalada grande + 1 cdita de aceite de oliva + 1 fruta aparte." },
+        { m: "Merienda (post-entreno)", t: "4 rodajas de pan integral + 60g de queso port salut light + 1 cda de miel + 30g de nueces + 1 banana. (En vez de miel y pan extra: 1 fruta más.)" },
         { m: "Cena", t: "200g de pollo + 300g de batata al horno + espinacas salteadas + 1 cdita de aceite de oliva." },
       ],
     },
@@ -68,8 +68,8 @@ export const DAYS = {
       d: "Día 6",
       meals: [
         { m: "Desayuno", t: "3 huevos revueltos + 3 rodajas de pan integral tostado + 1 banana." },
-        { m: "Almuerzo (pre-entreno, 12-12:30 h)", t: "220g de pescado (merluza/atún al natural) + 100g de arroz blanco + ensalada mixta grande + 1 cdita de aceite de oliva + 1 fruta aparte." },
-        { m: "Merienda (post-entreno)", t: "200g de yogur casero + 60g de avena + 30g de almendras + 1 banana." },
+        { m: "Almuerzo (pre-entreno, 12-12:30 h)", t: "220g de pescado (merluza/atún al natural) + 60g de arroz blanco (crudo) + ensalada mixta grande + 1 cdita de aceite de oliva + 1 fruta aparte." },
+        { m: "Merienda (post-entreno)", t: "200g de yogur casero + 80g de avena + 1 cda de miel + 30g de almendras + 1 banana. (En vez de miel y avena extra: 1 fruta más.)" },
         { m: "Cena", t: "Hamburguesas caseras: 180g de carne magra a la plancha (sin pan) + 250g de papa al horno + ensalada + 1 cdita de aceite de oliva." },
       ],
     },
@@ -171,7 +171,7 @@ export const INTERCHANGEABLE = {
     ],
     almuerzo: {
       proteina: "200g de pollo / 180g de bife magro / 220g de pescado",
-      carbo: "100g de arroz (blanco o integral) + 1 fruta aparte / 300-350g de papa hervida o al horno",
+      carbo: "60g de arroz crudo (blanco o integral) + 1 fruta aparte, y en la merienda sumar 1 cda de miel + 20g de avena o 1 fruta extra / 300-350g de papa hervida o al horno",
       verdura: "ensalada grande o brócoli/chauchas/calabaza al vapor (pre-entreno: poca grasa, 1 cdita de aceite)",
     },
     merienda: [
@@ -183,7 +183,7 @@ export const INTERCHANGEABLE = {
     ],
     cena: {
       proteina: "180g de bife magro / 200g de pollo / hamburguesa casera 180g",
-      carbo: "250-300g de papa o batata al horno / 100g de arroz o 110g de fideos integrales",
+      carbo: "250-300g de papa o batata al horno / 60g de arroz crudo (+ 1 cda de miel + 20g de avena o 1 fruta extra en la merienda) o 110g de fideos integrales",
       verdura: "brócoli, zucchini, morrón, espinaca salteada — porción generosa",
     },
   },
