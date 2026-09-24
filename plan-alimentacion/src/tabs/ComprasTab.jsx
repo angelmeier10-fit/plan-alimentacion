@@ -331,9 +331,14 @@ function CategoryCard({ category, categories, items, accent, actions }) {
           onCancel={() => setAdding(false)}
         />
       ) : (
-        <button onClick={() => setAdding(true)} style={{ ...linkButtonStyle(accent), marginTop: 10 }}>
-          + Agregar ítem
-        </button>
+        <div style={{ display: "flex", alignItems: "center", marginTop: 10 }}>
+          <button onClick={() => setAdding(true)} style={linkButtonStyle(accent)}>+ Agregar ítem</button>
+          {items.some((i) => i.done) && (
+            <button onClick={() => actions.clearDone(category.id)} style={{ ...linkButtonStyle("#6B6459"), marginLeft: "auto" }}>
+              Borrar los comprados
+            </button>
+          )}
+        </div>
       )}
     </Card>
   );
@@ -494,6 +499,21 @@ export default function ComprasTab({ data, accent }) {
         if (ok) offerUndo(`Borraste "${item.text}"`, (d) => (
           d.list.some((i) => i.id === id) ? d : { ...d, list: insertAt(d.list, Math.min(index, d.list.length), item) }
         ));
+        return ok;
+      });
+    },
+    clearDone: (catId) => {
+      const removed = shopping.list.map((item, index) => ({ item, index })).filter(({ item }) => item.catId === catId && item.done);
+      if (removed.length === 0) return Promise.resolve(false);
+      const ids = new Set(removed.map(({ item }) => item.id));
+      return update((d) => ({ ...d, list: d.list.filter((i) => !ids.has(i.id)) })).then((ok) => {
+        if (ok) offerUndo(`Borraste ${removed.length} ${removed.length === 1 ? "comprado" : "comprados"}`, (d) => {
+          let list = d.list;
+          for (const { item, index } of removed) {
+            if (!list.some((i) => i.id === item.id)) list = insertAt(list, Math.min(index, list.length), item);
+          }
+          return { ...d, list };
+        });
         return ok;
       });
     },
