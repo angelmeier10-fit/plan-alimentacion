@@ -24,7 +24,7 @@ export const DAYS = {
       meals: [
         { m: "Desayuno", t: "3 huevos revueltos + 3 rodajas de pan integral tostado + 1 banana mediana." },
         { m: "Almuerzo (pre-entreno, 12-12:30 h)", t: "200g de pechuga de pollo + 60g de arroz integral (crudo) + ensalada verde grande + 1 cdita de aceite de oliva + 1 fruta aparte." },
-        { m: "Merienda (post-entreno)", t: "200g de yogur casero + 80g de avena en hojuelas + 1 cda de miel + 1 banana + 30g de nueces. (En vez de miel y avena extra: 1 fruta más.)" },
+        { m: "Merienda (post-entreno)", t: "200g de yogur casero + 80g de avena en hojuelas + 1 banana + 30g de nueces. Miel: 1 cda (20g) mezclada en el yogur. (En vez de la miel y 20g de avena: 1 fruta más.)" },
         { m: "Cena", t: "180g de bife de carne vacuna magra + 250g de papa al horno + 150g de brócoli al vapor + 1 cdita de aceite de oliva." },
       ],
     },
@@ -33,7 +33,7 @@ export const DAYS = {
       meals: [
         { m: "Desayuno", t: "200g de yogur casero + 60g de avena + 1 banana + 30g de nueces (todo en un bol)." },
         { m: "Almuerzo (pre-entreno, 12-12:30 h)", t: "180g de bife magro + 60g de arroz blanco (crudo) + 150g de calabaza al horno + 1 cdita de aceite de oliva + 1 fruta aparte." },
-        { m: "Merienda (post-entreno)", t: "3 huevos duros + 4 rodajas de pan integral + 1 cda de miel + 1 manzana verde + 1 banana. (En vez de miel y pan extra: 1 fruta más.)" },
+        { m: "Merienda (post-entreno)", t: "3 huevos duros + 4 rodajas de pan integral + 1 manzana verde + 1 banana. Miel: 1 cda (20g) untada en el pan. (En vez de la miel y 1 rodaja de pan: 1 fruta más.)" },
         { m: "Cena", t: "200g de pechuga de pollo + 300g de batata al horno + ensalada grande de hojas verdes y tomate + 1 cdita de aceite de oliva." },
       ],
     },
@@ -42,7 +42,7 @@ export const DAYS = {
       meals: [
         { m: "Desayuno", t: "Tortilla dulce: 3 claras + 1 huevo entero + 60g de avena + banana pisada, a la sartén." },
         { m: "Almuerzo (pre-entreno, 12-12:30 h)", t: "220g de merluza o pescado blanco + 60g de arroz integral (crudo) + chauchas o brócoli + 1 cdita de aceite de oliva + 1 fruta aparte." },
-        { m: "Merienda (post-entreno)", t: "200g de yogur casero con 20g de avena y 1 cda de miel + 3 tostadas integrales + 30g de palta pisada + 1 banana. (En vez de miel y avena: 1 fruta más.)" },
+        { m: "Merienda (post-entreno)", t: "200g de yogur casero con 20g de avena + 3 tostadas integrales + 30g de palta pisada + 1 banana. Miel: 1 cda (20g) mezclada en el yogur. (En vez de la miel y la avena: 1 fruta más.)" },
         { m: "Cena", t: "200g de pollo picado + 110g de fideos integrales + salsa de tomate natural + ensalada grande + 1 cdita de aceite de oliva." },
       ],
     },
@@ -51,7 +51,7 @@ export const DAYS = {
       meals: [
         { m: "Desayuno", t: "3 huevos en tortilla + 3 rodajas de pan integral + 1 manzana." },
         { m: "Almuerzo (pre-entreno, 12-12:30 h)", t: "200g de pollo + 350g de papa hervida + ensalada de zanahoria y lechuga + 1 cdita de aceite de oliva." },
-        { m: "Merienda (post-entreno)", t: "200g de yogur casero + 80g de avena + 1 cda de miel + 30g de almendras + 1 banana. (En vez de miel y avena extra: 1 fruta más.)" },
+        { m: "Merienda (post-entreno)", t: "200g de yogur casero + 80g de avena + 30g de almendras + 1 banana. Miel: 1 cda (20g) mezclada en el yogur. (En vez de la miel y 20g de avena: 1 fruta más.)" },
         { m: "Cena", t: "180g de bife magro + 60g de arroz blanco (crudo) + zucchini y morrón a la plancha + 1 cdita de aceite de oliva." },
       ],
     },
@@ -60,7 +60,7 @@ export const DAYS = {
       meals: [
         { m: "Desayuno", t: "Licuado: 200g de yogur + 60g de avena + banana + hielo. Acompañar con 2 huevos duros." },
         { m: "Almuerzo (pre-entreno, 12-12:30 h)", t: "180g de bife magro + 60g de arroz integral (crudo) + ensalada grande + 1 cdita de aceite de oliva + 1 fruta aparte." },
-        { m: "Merienda (post-entreno)", t: "4 rodajas de pan integral + 60g de queso port salut light + 1 cda de miel + 30g de nueces + 1 banana. (En vez de miel y pan extra: 1 fruta más.)" },
+        { m: "Merienda (post-entreno)", t: "4 rodajas de pan integral + 60g de queso port salut light + 30g de nueces + 1 banana. Miel: 1 cda (20g) untada en 1 rodaja de pan. (En vez de la miel y esa rodaja: 1 fruta más.)" },
         { m: "Cena", t: "200g de pollo + 300g de batata al horno + espinacas salteadas + 1 cdita de aceite de oliva." },
       ],
     },
@@ -69,7 +69,7 @@ export const DAYS = {
       meals: [
         { m: "Desayuno", t: "3 huevos revueltos + 3 rodajas de pan integral tostado + 1 banana." },
         { m: "Almuerzo (pre-entreno, 12-12:30 h)", t: "220g de pescado (merluza/atún al natural) + 60g de arroz blanco (crudo) + ensalada mixta grande + 1 cdita de aceite de oliva + 1 fruta aparte." },
-        { m: "Merienda (post-entreno)", t: "200g de yogur casero + 80g de avena + 1 cda de miel + 30g de almendras + 1 banana. (En vez de miel y avena extra: 1 fruta más.)" },
+        { m: "Merienda (post-entreno)", t: "200g de yogur casero + 80g de avena + 30g de almendras + 1 banana. Miel: 1 cda (20g) mezclada en el yogur. (En vez de la miel y 20g de avena: 1 fruta más.)" },
         { m: "Cena", t: "Hamburguesas caseras: 180g de carne magra a la plancha (sin pan) + 250g de papa al horno + ensalada + 1 cdita de aceite de oliva." },
       ],
     },
@@ -250,7 +250,7 @@ export const SHOPPING = [
       "Pan lactal integral: 26 rodajas — 2 paquetes",
       "Fideos integrales: 170g",
       "Nueces 130g + almendras 120g",
-      "Miel (1 cda por merienda de Ángel)",
+      "Miel: 120g (1 cda de 20g en la merienda de Ángel, los 6 días)",
       "Salsa de tomate natural (sin azúcar)",
       "Queso port salut light: 100g",
       "Granola sin azúcar agregada (si la usás en la merienda)",

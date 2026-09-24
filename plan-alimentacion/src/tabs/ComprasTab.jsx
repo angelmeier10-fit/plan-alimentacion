@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Plus, Trash2, Check, NotebookPen, Pencil, X } from "lucide-react";
+import { Plus, Trash2, Check, NotebookPen, Pencil, X, ChevronUp, ChevronDown } from "lucide-react";
 import Card from "../components/Card.jsx";
 import SectionTitle from "../components/SectionTitle.jsx";
 import { getIcon } from "../iconMap.js";
@@ -33,20 +33,24 @@ function CheckRow({ text, done, onToggle, accent, fontSize = 13.5, children }) {
   );
 }
 
-function IconButton({ onClick, label, children, type = "button" }) {
+function IconButton({ onClick, label, children, type = "button", disabled }) {
   return (
     <button
       type={type}
       onClick={onClick}
       aria-label={label}
-      style={{ border: "none", background: "none", cursor: "pointer", color: "#8A8376", padding: 6, display: "flex" }}
+      disabled={disabled}
+      style={{
+        border: "none", background: "none", cursor: disabled ? "default" : "pointer",
+        color: "#8A8376", opacity: disabled ? 0.3 : 1, padding: 6, display: "flex",
+      }}
     >
       {children}
     </button>
   );
 }
 
-function NoteRow({ note, accent, fontSize, onToggle, onRemove, onRename }) {
+function NoteRow({ note, accent, fontSize, reordering, onToggle, onRemove, onRename, onMoveUp, onMoveDown }) {
   const [editing, setEditing] = useState(false);
   const [text, setText] = useState(note.text);
 
@@ -82,9 +86,52 @@ function NoteRow({ note, accent, fontSize, onToggle, onRemove, onRename }) {
 
   return (
     <CheckRow text={note.text} done={note.done} onToggle={onToggle} accent={accent} fontSize={fontSize}>
-      <IconButton onClick={startEdit} label="Editar"><Pencil size={15} /></IconButton>
-      <IconButton onClick={onRemove} label="Borrar"><Trash2 size={15} /></IconButton>
+      {reordering ? (
+        <>
+          <IconButton onClick={onMoveUp} disabled={!onMoveUp} label="Subir"><ChevronUp size={18} /></IconButton>
+          <IconButton onClick={onMoveDown} disabled={!onMoveDown} label="Bajar"><ChevronDown size={18} /></IconButton>
+        </>
+      ) : (
+        <>
+          <IconButton onClick={startEdit} label="Editar"><Pencil size={15} /></IconButton>
+          <IconButton onClick={onRemove} label="Borrar"><Trash2 size={15} /></IconButton>
+        </>
+      )}
     </CheckRow>
+  );
+}
+
+function NoteList({ items, fontSize, actions, ...rowProps }) {
+  return (
+    <ul style={listStyle}>
+      {items.map((n, i) => (
+        <NoteRow
+          key={n.id}
+          note={n}
+          fontSize={fontSize}
+          {...rowProps}
+          onToggle={() => actions.toggleNote(n.id)}
+          onRemove={() => actions.removeNote(n.id)}
+          onRename={(text) => actions.renameNote(n.id, text)}
+          onMoveUp={i > 0 ? () => actions.moveNote(n.id, -1) : null}
+          onMoveDown={i < items.length - 1 ? () => actions.moveNote(n.id, 1) : null}
+        />
+      ))}
+    </ul>
+  );
+}
+
+function CardHeader({ Icon, title, accent, reordering, setReordering, canReorder }) {
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
+      <Icon size={17} color={accent} />
+      <p style={{ margin: 0, fontSize: 14.5, fontWeight: 700, flex: 1 }}>{title}</p>
+      {(canReorder || reordering) && (
+        <button onClick={() => setReordering((r) => !r)} style={linkButtonStyle(accent)}>
+          {reordering ? "Listo" : "Ordenar"}
+        </button>
+      )}
+    </div>
   );
 }
 
@@ -130,32 +177,24 @@ const linkButtonStyle = (accent) => ({
 
 const listStyle = { margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 4 };
 
-function CategoryCard({ section, items, accent, addNote, toggleNote, removeNote, renameNote }) {
+function CategoryCard({ section, items, accent, actions }) {
   const [adding, setAdding] = useState(false);
-  const Icon = getIcon(section.icon);
+  const [reordering, setReordering] = useState(false);
 
   return (
     <Card>
-      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
-        <Icon size={17} color={accent} />
-        <p style={{ margin: 0, fontSize: 14.5, fontWeight: 700 }}>{section.cat}</p>
-      </div>
-      <ul style={listStyle}>
-        {items.map((n) => (
-          <NoteRow
-            key={n.id}
-            note={n}
-            accent={accent}
-            fontSize={13}
-            onToggle={() => toggleNote(n.id)}
-            onRemove={() => removeNote(n.id)}
-            onRename={(text) => renameNote(n.id, text)}
-          />
-        ))}
-      </ul>
+      <CardHeader
+        Icon={getIcon(section.icon)}
+        title={section.cat}
+        accent={accent}
+        reordering={reordering}
+        setReordering={setReordering}
+        canReorder={items.length > 1}
+      />
+      <NoteList items={items} fontSize={13} accent={accent} reordering={reordering} actions={actions} />
       {adding ? (
         <AddItemForm
-          onAdd={(text) => addNote(text, section.cat)}
+          onAdd={(text) => actions.addNote(text, section.cat)}
           accent={accent}
           placeholder={`Agregar a ${section.cat}…`}
           autoFocus
@@ -173,6 +212,7 @@ function CategoryCard({ section, items, accent, addNote, toggleNote, removeNote,
 export default function ComprasTab({ data, accent }) {
   const [notes, setNotes] = useState([]);
   const [error, setError] = useState(null);
+  const [reorderingNotes, setReorderingNotes] = useState(false);
 
   useEffect(() => subscribeShoppingNotes(
     setNotes,
@@ -193,6 +233,17 @@ export default function ComprasTab({ data, accent }) {
   const toggleNote = (id) => run(updateShoppingNotes((list) => list.map((n) => (n.id === id ? { ...n, done: !n.done } : n))));
   const renameNote = (id, text) => run(updateShoppingNotes((list) => list.map((n) => (n.id === id ? { ...n, text } : n))));
   const removeNote = (id) => run(updateShoppingNotes((list) => list.filter((n) => n.id !== id)));
+  const moveNote = (id, dir) => run(updateShoppingNotes((list) => {
+    const i = list.findIndex((n) => n.id === id);
+    if (i < 0) return list;
+    let j = i + dir;
+    while (j >= 0 && j < list.length && list[j].cat !== list[i].cat) j += dir;
+    if (j < 0 || j >= list.length) return list;
+    const next = [...list];
+    [next[i], next[j]] = [next[j], next[i]];
+    return next;
+  }));
+  const actions = { addNote, toggleNote, renameNote, removeNote, moveNote };
   const clearDoneNotes = () => run(updateShoppingNotes((list) => list.filter((n) => n.cat || !n.done)));
   const uncheckAll = () => run(updateShoppingNotes((list) => list.map((n) => (n.cat ? { ...n, done: false } : n))));
 
@@ -205,29 +256,21 @@ export default function ComprasTab({ data, accent }) {
       {error && <p style={{ margin: 0, fontSize: 12.5, color: "#B5443A" }}>{error}</p>}
 
       <Card>
-        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
-          <NotebookPen size={17} color={accent} />
-          <p style={{ margin: 0, fontSize: 14.5, fontWeight: 700 }}>Mis notas</p>
-        </div>
+        <CardHeader
+          Icon={NotebookPen}
+          title="Mis notas"
+          accent={accent}
+          reordering={reorderingNotes}
+          setReordering={setReorderingNotes}
+          canReorder={freeNotes.length > 1}
+        />
         <AddItemForm
           onAdd={(text) => addNote(text)}
           accent={accent}
           placeholder="Agregar algo para comprar…"
           style={{ marginBottom: freeNotes.length ? 12 : 0 }}
         />
-        <ul style={listStyle}>
-          {freeNotes.map((n) => (
-            <NoteRow
-              key={n.id}
-              note={n}
-              accent={accent}
-              fontSize={13.5}
-              onToggle={() => toggleNote(n.id)}
-              onRemove={() => removeNote(n.id)}
-              onRename={(text) => renameNote(n.id, text)}
-            />
-          ))}
-        </ul>
+        <NoteList items={freeNotes} fontSize={13.5} accent={accent} reordering={reorderingNotes} actions={actions} />
         {freeNotes.some((n) => n.done) && (
           <button onClick={clearDoneNotes} style={{ ...linkButtonStyle(accent), marginTop: 10 }}>
             Borrar los comprados
@@ -247,10 +290,7 @@ export default function ComprasTab({ data, accent }) {
           section={s}
           items={notes.filter((n) => n.cat === s.cat)}
           accent={accent}
-          addNote={addNote}
-          toggleNote={toggleNote}
-          removeNote={removeNote}
-          renameNote={renameNote}
+          actions={actions}
         />
       ))}
     </div>
