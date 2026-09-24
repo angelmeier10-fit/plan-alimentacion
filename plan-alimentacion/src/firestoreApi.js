@@ -1,5 +1,5 @@
 // plan-alimentacion/src/firestoreApi.js
-import { collection, doc, onSnapshot, query, setDoc, getDoc, arrayUnion } from "firebase/firestore";
+import { collection, doc, onSnapshot, query, setDoc, getDoc, arrayUnion, runTransaction } from "firebase/firestore";
 import { db } from "./firebaseConfig.js";
 
 export function subscribeProfiles(cb, onError) {
@@ -151,23 +151,23 @@ export async function deleteLogEntry(person, dateStr, entryId) {
   await setDoc(ref, { entries: next });
 }
 
-export function subscribeShoppingNotes(cb, onError) {
+export function subscribeShoppingList(cb, onError) {
   return onSnapshot(
     doc(db, "shoppingNotes", "main"),
-    (snap) => cb(snap.data()?.list ?? []),
+    (snap) => cb({ categories: snap.data()?.categories ?? [], list: snap.data()?.list ?? [] }),
     (err) => {
-      console.error("subscribeShoppingNotes error:", err);
+      console.error("subscribeShoppingList error:", err);
       onError?.(err);
     }
   );
 }
 
-export async function addShoppingNote(note) {
-  await setDoc(doc(db, "shoppingNotes", "main"), { list: arrayUnion(note) }, { merge: true });
-}
-
-export async function updateShoppingNotes(mapList) {
+// update recibe { categories, list } y devuelve la versión nueva; corre en transacción
+// porque los dos celulares pueden editar la lista a la vez.
+export async function updateShoppingList(update) {
   const ref = doc(db, "shoppingNotes", "main");
-  const snap = await getDoc(ref);
-  await setDoc(ref, { list: mapList(snap.data()?.list ?? []) });
+  await runTransaction(db, async (tx) => {
+    const data = (await tx.get(ref)).data();
+    tx.set(ref, update({ categories: data?.categories ?? [], list: data?.list ?? [] }));
+  });
 }

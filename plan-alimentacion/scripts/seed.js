@@ -75,9 +75,17 @@ async function seed() {
   await db.doc("shopping/main").set({ list: SHOPPING });
   console.log("shopping/main ok");
 
-  // Los ítems de la lista se editan desde la app, así que viven en shoppingNotes junto a las notas.
-  const shoppingItems = SHOPPING.flatMap((s) => s.items.map((text) => ({ id: randomUUID(), text, done: false, cat: s.cat })));
-  await db.doc("shoppingNotes/main").set({ list: shoppingItems });
+  // La lista de compras se edita desde la app: categorías e ítems viven en shoppingNotes.
+  // planCat y fromPlan permiten regenerar los ítems del plan sin tocar lo agregado a mano.
+  const categories = [
+    { id: randomUUID(), name: "Otros", icon: "NotebookPen" },
+    ...SHOPPING.map((s) => ({ id: randomUUID(), name: s.cat, icon: s.icon, planCat: s.cat })),
+  ];
+  const list = SHOPPING.flatMap((s) => {
+    const catId = categories.find((c) => c.planCat === s.cat).id;
+    return s.items.map((text) => ({ id: randomUUID(), text, done: false, catId, fromPlan: true }));
+  });
+  await db.doc("shoppingNotes/main").set({ categories, list });
   console.log("shoppingNotes/main ok");
 
   await db.doc("recipes/main").set({ list: RECIPES });
