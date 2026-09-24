@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Plus, Trash2, Check, NotebookPen } from "lucide-react";
+import { Plus, Trash2, Check, NotebookPen, Pencil, X } from "lucide-react";
 import Card from "../components/Card.jsx";
 import SectionTitle from "../components/SectionTitle.jsx";
 import { getIcon } from "../iconMap.js";
@@ -35,15 +35,58 @@ function CheckRow({ text, done, onToggle, accent, fontSize = 13.5, children }) {
   );
 }
 
-function DeleteButton({ onClick }) {
+function IconButton({ onClick, label, children, type = "button" }) {
   return (
     <button
+      type={type}
       onClick={onClick}
-      aria-label="Borrar"
-      style={{ border: "none", background: "none", cursor: "pointer", color: "#B3AC9C", padding: 4, display: "flex" }}
+      aria-label={label}
+      style={{ border: "none", background: "none", cursor: "pointer", color: "#8A8376", padding: 6, display: "flex" }}
     >
-      <Trash2 size={15} />
+      {children}
     </button>
+  );
+}
+
+function NoteRow({ note, accent, fontSize, onToggle, onRemove, onRename }) {
+  const [editing, setEditing] = useState(false);
+  const [text, setText] = useState(note.text);
+
+  const startEdit = () => { setText(note.text); setEditing(true); };
+
+  const save = (e) => {
+    e.preventDefault();
+    const t = text.trim();
+    if (!t || t === note.text) { setEditing(false); return; }
+    onRename(t).then((ok) => ok && setEditing(false));
+  };
+
+  if (editing) {
+    return (
+      <li>
+        <form onSubmit={save} style={{ display: "flex", alignItems: "center", gap: 4 }}>
+          <input
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            onKeyDown={(e) => e.key === "Escape" && setEditing(false)}
+            autoFocus
+            style={{
+              flex: 1, minWidth: 0, padding: "8px 12px", background: "#fff", border: `1px solid ${accent}`,
+              borderRadius: 10, fontSize, fontFamily: "'Inter', sans-serif",
+            }}
+          />
+          <IconButton type="submit" label="Guardar"><Check size={17} color={accent} /></IconButton>
+          <IconButton onClick={() => setEditing(false)} label="Cancelar"><X size={17} /></IconButton>
+        </form>
+      </li>
+    );
+  }
+
+  return (
+    <CheckRow text={note.text} done={note.done} onToggle={onToggle} accent={accent} fontSize={fontSize}>
+      <IconButton onClick={startEdit} label="Editar"><Pencil size={15} /></IconButton>
+      <IconButton onClick={onRemove} label="Borrar"><Trash2 size={15} /></IconButton>
+    </CheckRow>
   );
 }
 
@@ -89,7 +132,7 @@ const linkButtonStyle = (accent) => ({
 
 const listStyle = { margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 4 };
 
-function CategoryCard({ section, customItems, checkedSet, accent, run, addNote, toggleNote, removeNote }) {
+function CategoryCard({ section, customItems, checkedSet, accent, run, addNote, toggleNote, removeNote, renameNote }) {
   const [adding, setAdding] = useState(false);
   const Icon = getIcon(section.icon);
 
@@ -111,9 +154,15 @@ function CategoryCard({ section, customItems, checkedSet, accent, run, addNote, 
           />
         ))}
         {customItems.map((n) => (
-          <CheckRow key={n.id} text={n.text} done={n.done} onToggle={() => toggleNote(n.id)} accent={accent} fontSize={13}>
-            <DeleteButton onClick={() => removeNote(n.id)} />
-          </CheckRow>
+          <NoteRow
+            key={n.id}
+            note={n}
+            accent={accent}
+            fontSize={13}
+            onToggle={() => toggleNote(n.id)}
+            onRemove={() => removeNote(n.id)}
+            onRename={(text) => renameNote(n.id, text)}
+          />
         ))}
       </ul>
       {adding ? (
@@ -155,6 +204,7 @@ export default function ComprasTab({ data, accent }) {
   const addNote = (text, cat) =>
     run(addShoppingNote({ id: crypto.randomUUID(), text, done: false, ...(cat && { cat }) }));
   const toggleNote = (id) => run(updateShoppingNotes((list) => list.map((n) => (n.id === id ? { ...n, done: !n.done } : n))));
+  const renameNote = (id, text) => run(updateShoppingNotes((list) => list.map((n) => (n.id === id ? { ...n, text } : n))));
   const removeNote = (id) => run(updateShoppingNotes((list) => list.filter((n) => n.id !== id)));
   const clearDoneNotes = () => run(updateShoppingNotes((list) => list.filter((n) => n.cat || !n.done)));
   const uncheckAll = () => run(Promise.all([
@@ -184,9 +234,15 @@ export default function ComprasTab({ data, accent }) {
         />
         <ul style={listStyle}>
           {freeNotes.map((n) => (
-            <CheckRow key={n.id} text={n.text} done={n.done} onToggle={() => toggleNote(n.id)} accent={accent}>
-              <DeleteButton onClick={() => removeNote(n.id)} />
-            </CheckRow>
+            <NoteRow
+              key={n.id}
+              note={n}
+              accent={accent}
+              fontSize={13.5}
+              onToggle={() => toggleNote(n.id)}
+              onRemove={() => removeNote(n.id)}
+              onRename={(text) => renameNote(n.id, text)}
+            />
           ))}
         </ul>
         {freeNotes.some((n) => n.done) && (
@@ -213,6 +269,7 @@ export default function ComprasTab({ data, accent }) {
           addNote={addNote}
           toggleNote={toggleNote}
           removeNote={removeNote}
+          renameNote={renameNote}
         />
       ))}
     </div>
