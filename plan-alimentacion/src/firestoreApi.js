@@ -150,3 +150,24 @@ export async function deleteLogEntry(person, dateStr, entryId) {
   const next = entries.filter((e) => e.id !== entryId);
   await setDoc(ref, { entries: next });
 }
+
+export function subscribeShoppingNotes(cb, onError) {
+  return onSnapshot(
+    doc(db, "shoppingNotes", "main"),
+    (snap) => cb(snap.data()?.list ?? []),
+    (err) => {
+      console.error("subscribeShoppingNotes error:", err);
+      onError?.(err);
+    }
+  );
+}
+
+export async function addShoppingNote(note) {
+  await setDoc(doc(db, "shoppingNotes", "main"), { list: arrayUnion(note) }, { merge: true });
+}
+
+export async function updateShoppingNotes(mapList) {
+  const ref = doc(db, "shoppingNotes", "main");
+  const snap = await getDoc(ref);
+  await setDoc(ref, { list: mapList(snap.data()?.list ?? []) });
+}
