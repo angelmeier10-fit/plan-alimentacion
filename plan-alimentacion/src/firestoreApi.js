@@ -1,5 +1,5 @@
 // plan-alimentacion/src/firestoreApi.js
-import { collection, doc, onSnapshot, query, setDoc, getDoc, arrayUnion } from "firebase/firestore";
+import { collection, doc, onSnapshot, query, setDoc, getDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import { db } from "./firebaseConfig.js";
 
 export function subscribeProfiles(cb, onError) {
@@ -154,7 +154,7 @@ export async function deleteLogEntry(person, dateStr, entryId) {
 export function subscribeShoppingNotes(cb, onError) {
   return onSnapshot(
     doc(db, "shoppingNotes", "main"),
-    (snap) => cb(snap.data()?.list ?? []),
+    (snap) => cb({ list: snap.data()?.list ?? [], checked: snap.data()?.checked ?? [] }),
     (err) => {
       console.error("subscribeShoppingNotes error:", err);
       onError?.(err);
@@ -169,5 +169,17 @@ export async function addShoppingNote(note) {
 export async function updateShoppingNotes(mapList) {
   const ref = doc(db, "shoppingNotes", "main");
   const snap = await getDoc(ref);
-  await setDoc(ref, { list: mapList(snap.data()?.list ?? []) });
+  await setDoc(ref, { list: mapList(snap.data()?.list ?? []) }, { merge: true });
+}
+
+export async function setShoppingItemChecked(item, checked) {
+  await setDoc(
+    doc(db, "shoppingNotes", "main"),
+    { checked: checked ? arrayUnion(item) : arrayRemove(item) },
+    { merge: true }
+  );
+}
+
+export async function clearShoppingChecked() {
+  await setDoc(doc(db, "shoppingNotes", "main"), { checked: [] }, { merge: true });
 }
