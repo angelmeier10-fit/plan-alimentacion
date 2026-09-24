@@ -3,9 +3,7 @@ import { Plus, Trash2, Check, NotebookPen, Pencil, X } from "lucide-react";
 import Card from "../components/Card.jsx";
 import SectionTitle from "../components/SectionTitle.jsx";
 import { getIcon } from "../iconMap.js";
-import {
-  subscribeShoppingNotes, addShoppingNote, updateShoppingNotes, setShoppingItemChecked, clearShoppingChecked,
-} from "../firestoreApi.js";
+import { subscribeShoppingNotes, addShoppingNote, updateShoppingNotes } from "../firestoreApi.js";
 
 function CheckRow({ text, done, onToggle, accent, fontSize = 13.5, children }) {
   return (
@@ -132,7 +130,7 @@ const linkButtonStyle = (accent) => ({
 
 const listStyle = { margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 4 };
 
-function CategoryCard({ section, customItems, checkedSet, accent, run, addNote, toggleNote, removeNote, renameNote }) {
+function CategoryCard({ section, items, accent, addNote, toggleNote, removeNote, renameNote }) {
   const [adding, setAdding] = useState(false);
   const Icon = getIcon(section.icon);
 
@@ -143,17 +141,7 @@ function CategoryCard({ section, customItems, checkedSet, accent, run, addNote, 
         <p style={{ margin: 0, fontSize: 14.5, fontWeight: 700 }}>{section.cat}</p>
       </div>
       <ul style={listStyle}>
-        {section.items.map((it) => (
-          <CheckRow
-            key={it}
-            text={it}
-            done={checkedSet.has(it)}
-            onToggle={() => run(setShoppingItemChecked(it, !checkedSet.has(it)))}
-            accent={accent}
-            fontSize={13}
-          />
-        ))}
-        {customItems.map((n) => (
+        {items.map((n) => (
           <NoteRow
             key={n.id}
             note={n}
@@ -184,11 +172,10 @@ function CategoryCard({ section, customItems, checkedSet, accent, run, addNote, 
 
 export default function ComprasTab({ data, accent }) {
   const [notes, setNotes] = useState([]);
-  const [checked, setChecked] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => subscribeShoppingNotes(
-    ({ list, checked }) => { setNotes(list); setChecked(checked); },
+    setNotes,
     () => setError("No se pudieron cargar las notas."),
   ), []);
 
@@ -207,14 +194,10 @@ export default function ComprasTab({ data, accent }) {
   const renameNote = (id, text) => run(updateShoppingNotes((list) => list.map((n) => (n.id === id ? { ...n, text } : n))));
   const removeNote = (id) => run(updateShoppingNotes((list) => list.filter((n) => n.id !== id)));
   const clearDoneNotes = () => run(updateShoppingNotes((list) => list.filter((n) => n.cat || !n.done)));
-  const uncheckAll = () => run(Promise.all([
-    clearShoppingChecked(),
-    updateShoppingNotes((list) => list.map((n) => (n.cat ? { ...n, done: false } : n))),
-  ]));
+  const uncheckAll = () => run(updateShoppingNotes((list) => list.map((n) => (n.cat ? { ...n, done: false } : n))));
 
-  const checkedSet = new Set(checked);
   const freeNotes = notes.filter((n) => !n.cat);
-  const hasCheckedInList = checked.length > 0 || notes.some((n) => n.cat && n.done);
+  const hasCheckedInList = notes.some((n) => n.cat && n.done);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
@@ -262,10 +245,8 @@ export default function ComprasTab({ data, accent }) {
         <CategoryCard
           key={s.cat}
           section={s}
-          customItems={notes.filter((n) => n.cat === s.cat)}
-          checkedSet={checkedSet}
+          items={notes.filter((n) => n.cat === s.cat)}
           accent={accent}
-          run={run}
           addNote={addNote}
           toggleNote={toggleNote}
           removeNote={removeNote}

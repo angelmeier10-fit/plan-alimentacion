@@ -20,6 +20,7 @@
 // (en PowerShell: $env:GOOGLE_APPLICATION_CREDENTIALS="C:\ruta\service-account.json"; node scripts/seed.js)
 
 import { readFileSync } from "node:fs";
+import { randomUUID } from "node:crypto";
 import { initializeApp, cert } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
 import {
@@ -73,6 +74,11 @@ async function seed() {
 
   await db.doc("shopping/main").set({ list: SHOPPING });
   console.log("shopping/main ok");
+
+  // Los ítems de la lista se editan desde la app, así que viven en shoppingNotes junto a las notas.
+  const shoppingItems = SHOPPING.flatMap((s) => s.items.map((text) => ({ id: randomUUID(), text, done: false, cat: s.cat })));
+  await db.doc("shoppingNotes/main").set({ list: shoppingItems });
+  console.log("shoppingNotes/main ok");
 
   await db.doc("recipes/main").set({ list: RECIPES });
   console.log("recipes/main ok");
