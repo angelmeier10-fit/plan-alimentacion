@@ -4,7 +4,7 @@ export const PROFILES = {
     initial: "A",
     accent: "#2F6B4F",
     accentSoft: "#E7F1EB",
-    role: "37 años · 175cm · ~84kg · Fuerza + CrossFit 5x/sem + pádel",
+    role: "37 años · 175cm · ~84kg · CrossFit/musculación 5x/sem + pádel 3x/sem (recreativo)",
     macros: { kcal: 2600, prot: 175, fat: 72, carb: 300 },
   },
   gabriela: {
@@ -22,9 +22,9 @@ export const DAYS = {
     {
       d: "Día 1",
       meals: [
-        { m: "Desayuno", t: "3 huevos revueltos + 3 rodajas de pan integral tostado + 1 banana mediana." },
+        { m: "Desayuno", t: "3 huevos revueltos + 3 rodajas de pan integral tostado + 1 banana mediana + 30g de nueces." },
         { m: "Almuerzo (pre-entreno, 12-12:30 h)", t: "200g de pechuga de pollo + 60g de arroz integral (crudo) + ensalada verde grande + 1 cdita de aceite de oliva + 1 fruta aparte." },
-        { m: "Merienda (post-entreno)", t: "200g de yogur casero + 80g de avena en hojuelas + 1 banana + 30g de nueces. Miel: 1 cda (20g) mezclada en el yogur. (En vez de la miel y 20g de avena: 1 fruta más.)" },
+        { m: "Merienda (post-entreno)", t: "200g de yogur casero + 80g de avena en hojuelas + 1 banana. Miel: 1 cda (20g) mezclada en el yogur. (En vez de la miel y 20g de avena: 1 fruta más.)" },
         { m: "Cena", t: "180g de bife de carne vacuna magra + 250g de papa al horno + 150g de brócoli al vapor + 1 cdita de aceite de oliva." },
       ],
     },
@@ -33,8 +33,8 @@ export const DAYS = {
       meals: [
         { m: "Desayuno", t: "200g de yogur casero + 60g de avena + 1 banana + 30g de nueces (todo en un bol)." },
         { m: "Almuerzo (pre-entreno, 12-12:30 h)", t: "180g de bife magro + 60g de arroz blanco (crudo) + 150g de calabaza al horno + 1 cdita de aceite de oliva + 1 fruta aparte." },
-        { m: "Merienda (post-entreno)", t: "3 huevos duros + 4 rodajas de pan integral + 1 manzana verde + 1 banana. Miel: 1 cda (20g) untada en el pan. (En vez de la miel y 1 rodaja de pan: 1 fruta más.)" },
-        { m: "Cena", t: "200g de pechuga de pollo + 300g de batata al horno + ensalada grande de hojas verdes y tomate + 1 cdita de aceite de oliva." },
+        { m: "Merienda (post-entreno)", t: "3 huevos duros + 4 rodajas de pan integral + 1 banana. Miel: 1 cda (20g) untada en el pan. (En vez de la miel y 1 rodaja de pan: 1 fruta más.)" },
+        { m: "Cena", t: "200g de pechuga de pollo + 300g de batata al horno + ensalada grande de hojas verdes y tomate + 1 cdita de aceite de oliva. Postre: 1 manzana verde." },
       ],
     },
     {
@@ -49,27 +49,27 @@ export const DAYS = {
     {
       d: "Día 4",
       meals: [
-        { m: "Desayuno", t: "3 huevos en tortilla + 3 rodajas de pan integral + 1 manzana." },
+        { m: "Desayuno", t: "3 huevos en tortilla + 3 rodajas de pan integral + 1 manzana + 30g de almendras." },
         { m: "Almuerzo (pre-entreno, 12-12:30 h)", t: "200g de pollo + 350g de papa hervida + ensalada de zanahoria y lechuga + 1 cdita de aceite de oliva." },
-        { m: "Merienda (post-entreno)", t: "200g de yogur casero + 80g de avena + 30g de almendras + 1 banana. Miel: 1 cda (20g) mezclada en el yogur. (En vez de la miel y 20g de avena: 1 fruta más.)" },
+        { m: "Merienda (post-entreno)", t: "200g de yogur casero + 80g de avena + 1 banana. Miel: 1 cda (20g) mezclada en el yogur. (En vez de la miel y 20g de avena: 1 fruta más.)" },
         { m: "Cena", t: "180g de bife magro + 60g de arroz blanco (crudo) + zucchini y morrón a la plancha + 1 cdita de aceite de oliva." },
       ],
     },
     {
       d: "Día 5",
       meals: [
-        { m: "Desayuno", t: "Licuado: 200g de yogur + 60g de avena + banana + hielo. Acompañar con 2 huevos duros." },
+        { m: "Desayuno", t: "Licuado: 200g de yogur + 60g de avena + banana + hielo. Acompañar con 2 huevos duros y 30g de nueces." },
         { m: "Almuerzo (pre-entreno, 12-12:30 h)", t: "180g de bife magro + 60g de arroz integral (crudo) + ensalada grande + 1 cdita de aceite de oliva + 1 fruta aparte." },
-        { m: "Merienda (post-entreno)", t: "4 rodajas de pan integral + 60g de queso port salut light + 30g de nueces + 1 banana. Miel: 1 cda (20g) untada en 1 rodaja de pan. (En vez de la miel y esa rodaja: 1 fruta más.)" },
+        { m: "Merienda (post-entreno)", t: "4 rodajas de pan integral + 60g de queso port salut light + 1 banana. Miel: 1 cda (20g) untada en 1 rodaja de pan. (En vez de la miel y esa rodaja: 1 fruta más.)" },
         { m: "Cena", t: "200g de pollo + 300g de batata al horno + espinacas salteadas + 1 cdita de aceite de oliva." },
       ],
     },
     {
       d: "Día 6",
       meals: [
-        { m: "Desayuno", t: "3 huevos revueltos + 3 rodajas de pan integral tostado + 1 banana." },
+        { m: "Desayuno", t: "3 huevos revueltos + 3 rodajas de pan integral tostado + 1 banana + 30g de almendras." },
         { m: "Almuerzo (pre-entreno, 12-12:30 h)", t: "220g de pescado (merluza/atún al natural) + 60g de arroz blanco (crudo) + ensalada mixta grande + 1 cdita de aceite de oliva + 1 fruta aparte." },
-        { m: "Merienda (post-entreno)", t: "200g de yogur casero + 80g de avena + 30g de almendras + 1 banana. Miel: 1 cda (20g) mezclada en el yogur. (En vez de la miel y 20g de avena: 1 fruta más.)" },
+        { m: "Merienda (post-entreno)", t: "200g de yogur casero + 80g de avena + 1 banana. Miel: 1 cda (20g) mezclada en el yogur. (En vez de la miel y 20g de avena: 1 fruta más.)" },
         { m: "Cena", t: "Hamburguesas caseras: 180g de carne magra a la plancha (sin pan) + 250g de papa al horno + ensalada + 1 cdita de aceite de oliva." },
       ],
     },
@@ -163,28 +163,28 @@ export const SNACKS = {
 export const INTERCHANGEABLE = {
   angel: {
     desayuno: [
-      "3 huevos revueltos + 3 rodajas de pan integral + 1 banana",
+      "3 huevos revueltos + 3 rodajas de pan integral + 1 banana + 30g de nueces/almendras",
       "200g de yogur casero + 60g de avena + 1 banana + 30g de nueces/almendras",
-      "Tortilla dulce: 3 claras + 1 huevo + 60g de avena + banana pisada",
+      "Tortilla dulce: 3 claras + 1 huevo + 60g de avena + banana pisada + 30g de nueces/almendras",
       "Licuado: 200g de yogur + 60g de avena + banana + 2 huevos duros aparte",
-      "3 tostadas de pan lactal integral + queso untable Tregar light (1 cdita, ≈15g c/u) + 2 huevos revueltos + 1 fruta",
+      "3 tostadas de pan lactal integral + queso untable Tregar light (1 cdita, ≈15g c/u) + 2 huevos revueltos + 1 fruta + 30g de nueces/almendras",
     ],
     almuerzo: {
       proteina: "200g de pollo / 180g de bife magro / 220g de pescado",
-      carbo: "60g de arroz crudo (blanco o integral) + 1 fruta aparte, y en la merienda sumar 1 cda de miel + 20g de avena o 1 fruta extra / 300-350g de papa hervida o al horno",
+      carbo: "60g de arroz crudo (blanco o integral) + 1 fruta aparte / 300-350g de papa hervida o al horno",
       verdura: "ensalada grande o brócoli/chauchas/calabaza al vapor (pre-entreno: poca grasa, 1 cdita de aceite)",
     },
     merienda: [
-      "200g de yogur casero + 60g de avena + 1 banana + 30g de nueces/almendras",
+      "200g de yogur casero + 80g de avena + 1 banana + 1 cda de miel (o 1 fruta más en vez de la miel)",
       "3 huevos duros + 3 rodajas de pan integral + 2 frutas",
-      "3 tostadas integrales + 30g de palta pisada + 200g de yogur aparte + 1 banana",
-      "3 rodajas de pan integral + 60g de queso port salut light + 30g de nueces + 1 banana",
-      "200g de yogur casero + 90g de granola sin azúcar (revisar etiqueta; si no lleva frutos secos, sumar media cdita de aceite extra en la cena)",
+      "3 tostadas integrales + 30g de palta pisada + 200g de yogur aparte con 1 cda de miel + 1 banana",
+      "4 rodajas de pan integral + 60g de queso port salut light + 1 banana + 1 cda de miel en 1 rodaja",
+      "200g de yogur casero + 90g de granola sin azúcar (revisar etiqueta)",
     ],
     cena: {
       proteina: "180g de bife magro / 200g de pollo / hamburguesa casera 180g",
-      carbo: "250-300g de papa o batata al horno / 60g de arroz crudo (+ 1 cda de miel + 20g de avena o 1 fruta extra en la merienda) o 110g de fideos integrales",
-      verdura: "brócoli, zucchini, morrón, espinaca salteada — porción generosa",
+      carbo: "250-300g de papa o batata al horno / 60g de arroz crudo / 70g de fideos integrales crudos",
+      verdura: "brócoli, zucchini, morrón, espinaca salteada — porción generosa + 1 cdita de aceite de oliva",
     },
   },
   gabriela: {
